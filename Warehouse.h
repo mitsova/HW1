@@ -5,22 +5,27 @@
 class Warehouse
 {
 private:
-	Product** products;
+	Product* products;
 	size_t size;
 	size_t capacity;
 
 	void deallocate();
-	void copy();
+	void copy(const Warehouse& other);
+	void resize();
 
-	//TODO: finish
-	//TODO: big four
 public:
+	Warehouse();
+	Warehouse(const Product* products, size_t size, size_t capacity);
+	Warehouse(const Warehouse& other);
+	Warehouse& operator = (const Warehouse& other);
+	~Warehouse();
+	
 	void addProduct(const Product& product);
-	Product& printProduct(const char* name, const int quantity);
+	Product& exportProduct(const MyString name, const int quantity);
 	void showChanges(const Date startDate, const Date endDate);
 	void cleanUp(const Date date);
 
-	friend std::ostream& operator << (std::ostream& out, const Warehouse& time);
+	friend std::ostream& operator << (std::ostream& out, const Warehouse& warehouse);
 };
 
 #endif

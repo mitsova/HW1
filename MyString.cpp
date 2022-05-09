@@ -4,6 +4,8 @@
 
 #include "MyString.h"
 
+#pragma warning(disable : 4996)
+
 MyString::MyString()
 {
 	this->string = nullptr;
@@ -142,11 +144,13 @@ MyString& MyString::operator+=(char ch)
 	}
 
 	std::size_t newSize = this->size + 1;
-	char* newString = new (std::nothrow) char[newSize + 1];
-	if (!newSize)
+	char* newString;
+	try {
+		newString = new char[newSize + 1];
+	}
+	catch (std::exception)
 	{
-		std::cout << "Memory problem";
-		return;
+		throw std::runtime_error("Memory problem");
 	}
 
 	if (!this->empty())
@@ -175,11 +179,14 @@ MyString& MyString::operator+=(const MyString& other)
 	if (other.string)
 	{
 		std::size_t newSize = this->size + other.size;
-		char* newString = new (std::nothrow) char[newSize + 1];
-		if (!newString)
+
+		char* newString;
+		try {
+			newString = new char[newSize + 1];
+		}
+		catch (std::exception)
 		{
-			std::cout << "Memory problem";
-			return;
+			throw std::runtime_error("Memory problem");
 		}
 
 		strcpy(newString, this->string);

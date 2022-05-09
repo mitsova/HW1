@@ -2,6 +2,9 @@
 #define DATE_H
 
 #include <cstdint>
+
+#include "MyString.h"
+
 class Date
 {
 private:
@@ -12,16 +15,20 @@ private:
     void printNumberWithLeadingZero(unsigned int number) const;
 
 public:
+	Date();
     Date(unsigned int day, unsigned int month, unsigned int year);
 
     unsigned int day() const;
     unsigned int month() const;
     unsigned int year() const;
 
-    bool operator==(const Date& rhs) const;
-    bool operator<(const Date& rhs) const;
+    bool operator==(const Date& other) const;
+    bool operator<(const Date& other) const;
+	bool operator<=(const Date& other) const;
 
     void print() const;
+
+	friend std::ostream& operator<<(std::ostream& out, const Date& date);
 };
 
 #endif

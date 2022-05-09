@@ -1,6 +1,12 @@
 #include <iostream>
 
+#include "Date.h"
+#include "Product.h"
+
+#pragma warning(disable :4996)
+
 int main()
 {
-    std::cout << "Hello World!\n";
+	Product test = Product();
+	std::cout << test;
 }
